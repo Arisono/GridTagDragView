@@ -11,16 +11,23 @@ import com.wenhuaijun.easytagdragview.R;
 import com.wenhuaijun.easytagdragview.widget.TipItemView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Wenhuaijun on 2016/5/26 0026.
  */
 public class DragTipAdapter extends AbsTipAdapter implements View.OnLongClickListener, TipItemView.OnDeleteClickListener{
+
     private boolean  isEditing =false;
     private static final ClipData EMPTY_CLIP_DATA = ClipData.newPlainText("", "");
     private TipItemView.OnSelectedListener mListener;
     private TipItemView.OnDeleteClickListener deleteClickListener;
     private OnFirstDragStartCallback callback;
+
+    private int lastPosition = -1; // 记录上一次选中的位置，-1表示未选中
+    private boolean multiChoose; // 表示当前适配器是否允许多选
+
+
     public DragTipAdapter(Context context, DragDropListener dragDropListener, TipItemView.OnDeleteClickListener deleteClickListener) {
         super(context, dragDropListener);
         this.deleteClickListener =deleteClickListener;
@@ -39,6 +46,11 @@ public class DragTipAdapter extends AbsTipAdapter implements View.OnLongClickLis
             view.showDeleteImg();
         }else{
             view.hideDeleteImg();
+        }
+
+        if (position<getmTextSelected().size()) {
+            int resId = getmTextSelected().get(position) ? R.color.green : R.drawable.tag_item_bg;
+            view.findViewById(R.id.tagview_title).setBackgroundResource(resId);
         }
         //设置点击监听
         view.setItemListener(position, mListener);
@@ -106,4 +118,6 @@ public class DragTipAdapter extends AbsTipAdapter implements View.OnLongClickLis
         v.startDrag(EMPTY_CLIP_DATA, new View.DragShadowBuilder(),
                 DragDropGirdView.DRAG_FAVORITE_TILE, 0);
     }
+
+
 }

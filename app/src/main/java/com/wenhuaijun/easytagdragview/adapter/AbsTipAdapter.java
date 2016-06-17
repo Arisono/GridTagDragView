@@ -38,12 +38,15 @@ import java.util.List;
  */
 public abstract class AbsTipAdapter extends BaseAdapter implements
         OnDragDropListener {
+
+
     private static final String TAG = "AbsTipAdapter";
 
     protected DragDropListener mDragDropListener;
 
     protected Context mContext;
 
+    private List<Boolean> mTextSelected = new ArrayList<Boolean>(); // 定义一个向量作为选中与否容器
     /**
      * Contact data stored in cache. This is used to populate the associated view.
      */
@@ -147,11 +150,15 @@ public abstract class AbsTipAdapter extends BaseAdapter implements
         mInDragging = inDragging;
     }
 
+
     //当数据改变时调用
     public void setData(List<Tip> tips) {
         if (!mDelayCursorUpdates && tips != null) {
             this.tips.clear();
             this.tips.addAll(tips);
+            for (int i=0;i<tips.size();i++){
+                mTextSelected.add(i,false);
+            }
             // cause a refreshData of any views that rely on this data
             notifyDataSetChanged();
             // about to start redraw
@@ -452,4 +459,12 @@ public abstract class AbsTipAdapter extends BaseAdapter implements
         }
     }
 
+
+    public List<Boolean> getmTextSelected() {
+        return mTextSelected;
+    }
+
+    public void setmTextSelected(List<Boolean> mTextSelected) {
+        this.mTextSelected = mTextSelected;
+    }
 }

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
     <RelativeLayout
@@ -39,10 +40,14 @@
             android:layout_alignParentRight="true"
             />
     </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:nestedScrollingEnabled="false"
+        android:fillViewport="true">
     <RelativeLayout
         android:layout_below="@+id/tab"
         android:layout_width="match_parent"
-        android:padding="8dp"
         android:layout_height="match_parent">
         <com.wenhuaijun.easytagdragview.widget.DragDropGirdView
             android:id="@+id/tagdrag_view"
@@ -50,12 +55,9 @@
             android:layout_height="wrap_content"
             android:divider="@null"
             android:fadingEdge="none"
-            android:horizontalSpacing="12dp"
-            android:verticalSpacing="10dp"
             app:fixed_type="true"
-            android:nestedScrollingEnabled="true"
-            android:numColumns="4"
-            />
+            android:nestedScrollingEnabled="false"
+            android:numColumns="4" />
         <TextView
             android:id="@+id/tv"
             android:layout_below="@+id/tagdrag_view"
@@ -73,24 +75,25 @@
             android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/more_tv"
+                android:paddingLeft="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="点击添加更多栏目"
                 />
-            <GridView
+            <!---->
+            <com.wenhuaijun.easytagdragview.widget.MyGridView
                 android:id="@+id/add_gridview"
                 android:layout_width="match_parent"
-                android:nestedScrollingEnabled="true"
+                android:nestedScrollingEnabled="false"
                 android:numColumns="4"
+                android:paddingRight="8dp"
                 android:layout_marginTop="8dp"
-                android:horizontalSpacing="12dp"
-                android:verticalSpacing="10dp"
                 android:fadingEdge="none"
                 android:layout_below="@+id/more_tv"
                 android:divider="@null"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
-            </GridView>
+            </com.wenhuaijun.easytagdragview.widget.MyGridView>
         </RelativeLayout>
 
 
@@ -108,6 +111,6 @@
                 android:visibility="gone" />
         </FrameLayout>
     </RelativeLayout>
+    </ScrollView>
 
-
-</RelativeLayout>
+</LinearLayout>

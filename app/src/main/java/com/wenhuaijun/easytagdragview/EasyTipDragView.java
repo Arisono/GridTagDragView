@@ -17,6 +17,7 @@ import com.wenhuaijun.easytagdragview.adapter.DragTipAdapter;
 import com.wenhuaijun.easytagdragview.adapter.AbsTipAdapter;
 import com.wenhuaijun.easytagdragview.bean.Tip;
 import com.wenhuaijun.easytagdragview.widget.DragDropGirdView;
+import com.wenhuaijun.easytagdragview.widget.MyGridView;
 import com.wenhuaijun.easytagdragview.widget.TipItemView;
 
 import java.util.ArrayList;
@@ -35,7 +36,10 @@ public class EasyTipDragView extends RelativeLayout implements AbsTipAdapter.Dra
     private OnDataChangeResultCallback dataResultCallback;
     private OnCompleteCallback completeCallback;
     private ArrayList<Tip> lists;
+
     private boolean isOpen= false;
+
+
     public EasyTipDragView(Context context) {
         super(context);
         initView();
@@ -86,6 +90,7 @@ public class EasyTipDragView extends RelativeLayout implements AbsTipAdapter.Dra
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 dragTipAdapter.getData().add(addTipAdapter.getData().get(position));
+                dragTipAdapter.getmTextSelected().add(false);
                 dragTipAdapter.refreshData();
                 addTipAdapter.getData().remove(position);
                 addTipAdapter.refreshData();
@@ -113,8 +118,14 @@ public class EasyTipDragView extends RelativeLayout implements AbsTipAdapter.Dra
         addTipAdapter.getData().add(entity);
         addTipAdapter.refreshData();
         dragTipAdapter.getData().remove(position);
+        dragTipAdapter.getmTextSelected().remove(position);
         dragTipAdapter.refreshData();
     }
+
+    public DragTipAdapter getDragTipAdapter(){
+        return dragTipAdapter;
+    }
+
     public void setDragData(List<Tip> tips){
         dragTipAdapter.setData(tips);
     }

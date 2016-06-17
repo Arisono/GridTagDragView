@@ -1,5 +1,6 @@
 package com.wenhuaijun.easytagdragview.widget;
 
+import android.util.Log;
 import android.view.View;
 
 import com.wenhuaijun.easytagdragview.listener.OnDragDropListener;
@@ -24,6 +25,11 @@ public class DragDropController {
      * {@link DragDropController} controls.
      */
     public interface DragItemContainer {
+        /**
+         * @param x
+         * @param y
+         * @return
+         */
         View getViewForLocation(int x, int y);
     }
 
@@ -49,10 +55,12 @@ public class DragDropController {
     public void handleDragHovered(View v, int x, int y) {
         v.getLocationOnScreen(mLocationOnScreen);
         final int screenX = x + mLocationOnScreen[0];
-        final int screenY = y + mLocationOnScreen[1];
+        final int screenY = y ;
+//        final int screenY = y + mLocationOnScreen[1];
         final View view = mDragItemContainer.getViewForLocation(
                 screenX, screenY);
         if(view == null){
+            Log.i("Arison", "view=" + null);
             return;
         }
         for (int i = 0; i < mOnDragDropListeners.size(); i++) {

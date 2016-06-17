@@ -88,6 +88,7 @@ public class DragDropGirdView extends GridView implements OnDragDropListener,
                     }
                     mDragShadowOverlay.setVisibility(GONE);
                     mDragShadowOverlay.setImageBitmap(null);
+                    Log.i("Arison","mDragShadowOverlay隐藏");
                 }
             };
 
@@ -118,6 +119,11 @@ public class DragDropGirdView extends GridView implements OnDragDropListener,
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
+        final int action = ev.getAction();
+        final int eX = (int) ev.getX();
+        final int eY = (int) ev.getY();
+        Log.i("Arison","ex:"+eX);
+        Log.i("Arison","ey:"+eY);
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             mTouchDownForDragStartX = (int) ev.getX();
             mTouchDownForDragStartY = (int) ev.getY();
@@ -126,18 +132,23 @@ public class DragDropGirdView extends GridView implements OnDragDropListener,
         return super.onInterceptTouchEvent(ev);
     }
 
+
+
     @Override
     public boolean onDragEvent(DragEvent event) {
 
         final int action = event.getAction();
         final int eX = (int) event.getX();
         final int eY = (int) event.getY();
+
         switch (action) {
             case DragEvent.ACTION_DRAG_STARTED:
                 if (!DRAG_FAVORITE_TILE.equals(event.getLocalState())) {
                     return false;
                 }
-                if (!mDragDropController.handleDragStarted(eX, eY)) {
+                if (!mDragDropController.handleDragStarted(eX, mTouchDownForDragStartY)) {
+                    Log.i("Arison","拖：ex:"+eX);
+                    Log.i("Arison","拖：ey:"+eY);
                     //True if the drag is started, false if the drag is cancelled for some reason.
                     return false;
                 }
@@ -219,6 +230,7 @@ public class DragDropGirdView extends GridView implements OnDragDropListener,
         mDragShadowOverlay.setImageBitmap(mDragShadowBitmap);
         mDragShadowOverlay.setVisibility(VISIBLE);
         mDragShadowOverlay.setAlpha(DRAG_SHADOW_ALPHA);
+        Log.i("Arison", "mDragShadowOverlay展示");
 
         mDragShadowOverlay.setX(mDragShadowLeft);
         mDragShadowOverlay.setY(mDragShadowTop);
@@ -231,7 +243,9 @@ public class DragDropGirdView extends GridView implements OnDragDropListener,
         mDragShadowLeft = x - mTouchOffsetToChildLeft - mLocationOnScreen[0];
         mDragShadowTop = y - mTouchOffsetToChildTop - mLocationOnScreen[1];
         // Draw the drag shadow at its last known location if the drag shadow exists.
+        Log.i("Arison","mDragShadowOverlay:"+mDragShadowOverlay);
         if (mDragShadowOverlay != null) {
+
             mDragShadowOverlay.setX(mDragShadowLeft);
             mDragShadowOverlay.setY(mDragShadowTop);
         }
@@ -279,7 +293,7 @@ public class DragDropGirdView extends GridView implements OnDragDropListener,
         // Calculate the X and Y coordinates(坐标) of the drag event relative to the view
         final int viewX = x - mLocationOnScreen[0];
         final int viewY = y - mLocationOnScreen[1];
-        View child = getViewAtPosition(viewX, viewY);
+        View child = getViewAtPosition(viewX, y);
 
         return child;
     }
@@ -303,8 +317,10 @@ public class DragDropGirdView extends GridView implements OnDragDropListener,
     @Override
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         if (!mIsFixedHeight) {
+            Log.i("Arison","正常模式！");
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         } else {
+            Log.i("Arison","冲突模式！");
             int expandSpec = MeasureSpec.makeMeasureSpec(
                     Integer.MAX_VALUE >> 2, MeasureSpec.AT_MOST);
             super.onMeasure(widthMeasureSpec, expandSpec);
