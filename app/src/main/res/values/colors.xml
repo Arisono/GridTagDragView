@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="blue_selected">#398DFD</color>
     <color name="colorPrimary">#00A8F1</color>
     <color name="colorPrimaryDark">#038ECE</color>
     <color name="colorAccent">#038ECE</color>
@@ -25,6 +26,7 @@
     <color name="blue_light">#87bfff</color>
     <color name="blue_deep">#708be0</color>
     <color name="green">#66c96a</color>
+
 
     <color name="font_dark">#1D1E1E</color>
     <color name="font_light">#464e76</color>

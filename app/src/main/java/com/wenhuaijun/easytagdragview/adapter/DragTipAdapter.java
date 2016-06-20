@@ -49,7 +49,7 @@ public class DragTipAdapter extends AbsTipAdapter implements View.OnLongClickLis
         }
 
         if (position<getmTextSelected().size()) {
-            int resId = getmTextSelected().get(position) ? R.color.green : R.drawable.tag_item_bg;
+            int resId = getmTextSelected().get(position) ? R.color.colorPrimary : R.drawable.tag_item_bg;
             view.findViewById(R.id.tagview_title).setBackgroundResource(resId);
         }
         //设置点击监听

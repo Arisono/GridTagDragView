@@ -43,7 +43,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:nestedScrollingEnabled="false"
+        android:scrollbars="none"
         android:fillViewport="true">
     <RelativeLayout
         android:layout_below="@+id/tab"
@@ -52,11 +52,10 @@
         <com.wenhuaijun.easytagdragview.widget.DragDropGirdView
             android:id="@+id/tagdrag_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:divider="@null"
             android:fadingEdge="none"
             app:fixed_type="true"
-            android:nestedScrollingEnabled="false"
             android:numColumns="4" />
         <TextView
             android:id="@+id/tv"
@@ -64,8 +63,7 @@
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="长按排序或删除"
-            />
+            android:text="长按排序或删除"/>
         <RelativeLayout
             android:layout_marginTop="8dp"
             android:layout_below="@id/tv"
@@ -78,38 +76,38 @@
                 android:paddingLeft="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="点击添加更多栏目"
-                />
+                android:text="点击添加更多栏目"/>
             <!---->
             <com.wenhuaijun.easytagdragview.widget.MyGridView
                 android:id="@+id/add_gridview"
                 android:layout_width="match_parent"
-                android:nestedScrollingEnabled="false"
+                android:nestedScrollingEnabled="true"
                 android:numColumns="4"
                 android:paddingRight="8dp"
                 android:layout_marginTop="8dp"
                 android:fadingEdge="none"
                 android:layout_below="@+id/more_tv"
                 android:divider="@null"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
             </com.wenhuaijun.easytagdragview.widget.MyGridView>
         </RelativeLayout>
 
 
         <!-- Host container for the tile drag shadow -->
-        <FrameLayout
-            android:id="@+id/activity_overlay"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <!--<FrameLayout-->
+            <!--android:id="@+id/activity_overlay"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
 
             <ImageView
                 android:id="@+id/tile_drag_shadow_overlay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:importantForAccessibility="no"
-                android:visibility="gone" />
-        </FrameLayout>
+                />
+        <!--</FrameLayout>-->
     </RelativeLayout>
     </ScrollView>
 
