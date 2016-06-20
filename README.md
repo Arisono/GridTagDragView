@@ -1,8 +1,12 @@
-# EasyTagDragView
+# GridTagDragView
 仿网易新闻app下拉标签选择菜单，长按拖动排序，点击增删标签控件
 
 ## 修复Bug
--
+- 在https://github.com/wenhuaijun/EasyTagDragView基础之上优化改进的版本，再次感谢作者已经做了大部分贡献；这个原版本的bug有没有修复，你去clone下就知道了，估计是没有修复，你能发现不少问题；
+- tag太长导致显示出现bug
+- 表格控件嵌套在scrollview中的冲突问题
+- 带有选中tag分类效果
+- apk 文件在主目录下的apk文件夹下
 
 ##示例
 ![introduce.gif](introduce.gif)
